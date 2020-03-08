@@ -1,4 +1,5 @@
 import React from 'react';
+import Axios from 'axios';
 
 
 export default class Add extends React.Component {
@@ -13,11 +14,17 @@ export default class Add extends React.Component {
   }
 
   changeHandler(e){
-
+    let {name, value} = e.target
+    this.setState({
+      [name]: value
+    })
   }
 
   handleSubmit(e){
-
+    e.preventDefault();
+    Axios.post('/api/students', this.state)
+    .then(() => {console.log('success')})
+    .catch((err) => {console.error(err)})
   }
 
   render() {
@@ -25,10 +32,10 @@ export default class Add extends React.Component {
       <div>
         <form>
           <label>Student Name: </label>
-          <input type="text" name="name" />
+          <input type="text" name="name" onChange={this.changeHandler}/>
           <label>Image URL: </label>
-          <input type="text" name="imgurl" />
-          <button type="submit" value="Submit">Submit</button>
+          <input type="text" name="imgurl" value={this.state.name} onChange={this.changeHandler}/>
+          <button type="submit" value="Submit" onClick={this.handleSubmit}>Submit</button>
         </form>
       </div>
     )

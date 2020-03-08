@@ -7,7 +7,13 @@ const seedData = require('./students.json');
 // all students are inserted into the database
 var insertSeedData = function() {
   // fill in your seed function here
-  
+  //insertmany or create
+  Student.insertMany(seedData)
+    .then(() => {
+      console.log('seeded');
+      mongoose.connection.close();
+    })
+    .catch(err => {console.error(err)})
 };
 
 // NOTE: DO NOT invoke this function as part of your

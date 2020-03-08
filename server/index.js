@@ -13,5 +13,10 @@ server.use(bodyparser.urlencoded({ extended: true }));
 
 server.use(express.static(path.join(__dirname, '../client/dist')));
 server.use('/api', router);
+//server.get('/api', router);
 
 server.listen(port, () => console.log(`listening on ${port}`))
+
+
+/*write out server index, router, controller => postman =>
+write out db connection + helpers => postman*/
